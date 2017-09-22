@@ -1,16 +1,16 @@
 const path = require('path');
 const express = require('express');
 const Gun = require('gun');
+require('gun/lib/path.js');
 const levelup = require('levelup');
 const leveldown = require('leveldown');
 // const mongoDown = require('mongodown');
 // var mongojs = require('mongojs');
 
 const cors = require('cors');
-
 const app = express();
 
-const { generateKeys } = require('./workers/encryptions');
+const { generateKeys } = require('./workers/index');
 const api = require('./api');
 
 // var db = mongojs('mongodb', ['ut']);
@@ -74,5 +74,6 @@ app.get('/index.html', function (_, res) {
 
 app.get('*', api);
 
-setTimeout( generateKeys, 1000);
+setTimeout( generateKeys, 1000); // generateKeys after 1 sec
+
 Gun(gunOptions);
